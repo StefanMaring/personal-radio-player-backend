@@ -69,6 +69,18 @@ def recentlyPlayed(timestamp: str, filename: str):
 
     return {"message": "File added to recently played"}
 
+@app.get("/recentlyPlayed")
+def getRecentlyPlayed():
+    recentlyPlayedFile = os.path.join("recentlyPlayed.json")
+    
+    if not os.path.exists(recentlyPlayedFile):
+        raise HTTPException(status_code=404, detail="File not found")
+    
+    with open(recentlyPlayedFile, "r") as infile:
+        data = json.load(infile)
+
+    return {"data": data}
+
 #Queue functions
 def enqueue(file_name):
     if file_name not in audio_queue:
