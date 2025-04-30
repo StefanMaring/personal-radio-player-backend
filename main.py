@@ -1,9 +1,25 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.responses import FileResponse
+from fastapi.middleware.cors import CORSMiddleware
 import os
 import random
 
 app = FastAPI()
+
+origins = [
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["GET"],               
+    allow_headers=["*"],       
+    expose_headers=["Content-Disposition"],   
+)
+
 AUDIO_FOLDER = os.path.join(os.path.dirname(__file__), "audio")
 audio_queue = [];
 
