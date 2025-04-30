@@ -56,14 +56,13 @@ def recentlyPlayed(timestamp: str, filename: str):
     if not os.path.exists(recentlyPlayedFile):
         raise HTTPException(status_code=404, detail="File not found")
     
-    if os.path.exists(recentlyPlayedFile):
-        with open(recentlyPlayedFile, "r") as infile:
-            existingData = json.load(infile) #Get the existing data
-        
-        if isinstance(existingData, list):
-            existingData.append(recentlyPlayedData) #Append the new data to the list
-        else:
-            existingData = [recentlyPlayedData] #If the current data is not a list, create a new list with the new data
+    with open(recentlyPlayedFile, "r") as infile:
+        existingData = json.load(infile) #Get the existing data
+    
+    if isinstance(existingData, list):
+        existingData.append(recentlyPlayedData) #Append the new data to the list
+    else:
+        existingData = [recentlyPlayedData] #If the current data is not a list, create a new list with the new data
 
     with open(recentlyPlayedFile, "w") as outfile:
         json.dump(existingData, outfile) #Write updated song list to file
