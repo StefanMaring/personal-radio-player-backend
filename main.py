@@ -38,7 +38,7 @@ def getSong():
     if not os.path.exists(file_path):
         raise HTTPException(status_code=404, detail="File not found")
     
-    if(len(audio_queue) >= 3):
+    if(len(audio_queue) >= 5):
         dequeue()
 
     enqueue(random_mp3)
@@ -90,7 +90,7 @@ def enqueue(file_name):
     
 def dequeue():
     if audio_queue:
-        return audio_queue.pop(2)
+        return audio_queue.pop(4)
     else:
         raise HTTPException(status_code=404, detail="Queue is empty")
     
