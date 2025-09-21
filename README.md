@@ -24,4 +24,4 @@ After creating the folder, you can put as many `.mp3` files in as you want.
 ## Randomized Song Selection
 This API utilizes a small queue data structure implementation in order to make sure the same song doesn't play directly again. 
 If a song is selected and it's in the queue, the script will continue to find a song that is not in the queue. 
-When the queue has more than 5 songs, a song is removed from the queue. This allows for that particular song to be played again.
+When the queue has 5 songs, a song is removed from the queue. This allows for that particular song to be played again.
